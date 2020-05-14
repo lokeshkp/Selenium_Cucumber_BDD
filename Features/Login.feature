@@ -1,0 +1,28 @@
+Feature: Login
+
+	@Sanity
+  Scenario: Successfull login with valid credentials
+    Given User Launch Chrome browser
+    When User opens URL "https://admin-demo.nopcommerce.com/login/"
+    And User enters Email as "admin@yourstore.com" and Password as "admin"
+    And Click on Login
+    Then Page Title should be "Dashboard / nopCommerce administration"
+    When User click log out link
+    Then Page Title should be "Your store. Login"
+    And Close browser
+    
+	@Regression
+  Scenario Outline: Login functionality with Data Driven
+    Given User Launch Chrome browser
+    When User opens URL "https://admin-demo.nopcommerce.com/login/"
+    And User enters Email as "<email>" and Password as "<password>"
+    And Click on Login
+    Then Page Title should be "Dashboard / nopCommerce administration"
+    When User click log out link
+    Then Page Title should be "Your store. Login"
+    And Close browser
+
+    Examples: 
+      | email                | password |
+      | admin@yourstore.com  | admin    |
+      | admin1@yourstore.com | admin123 |
